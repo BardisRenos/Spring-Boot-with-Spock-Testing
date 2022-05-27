@@ -1,7 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	id 'groovy'
+	id 'application'
 }
 
 group = 'org.example'
@@ -19,13 +20,33 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation (
+			'org.springframework.boot:spring-boot-starter-data-jpa',
+			'org.springframework.boot:spring-boot-starter-jdbc',
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-test',
+			'org.glassfish.jaxb:jaxb-runtime:2.3.1',
+			'junit:junit:4.13.2',
+			'net.minidev:json-smart:2.3',
+			'net.minidev:asm:1.0.2'
+	)
+
+	testImplementation (
+			'org.spockframework:spock-core:2.2-M1-groovy-3.0',
+			'org.junit.jupiter:junit-jupiter-api:5.8.2',
+			'org.hamcrest:hamcrest-core:2.2',
+			'org.codehaus.groovy:groovy-all:3.0.10',
+			'org.spockframework:spock-spring:2.2-M1-groovy-3.0',
+			'com.geowarin:spring-spock-mvc:0.2.1'
+	)
+
 	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	runtimeOnly "com.h2database:h2"
+	runtimeOnly 'com.h2database:h2'
+
+	testRuntimeOnly (
+			'net.bytebuddy:byte-buddy:1.12.10',
+			'org.objenesis:objenesis:3.2'
+	)
 
 }
 
