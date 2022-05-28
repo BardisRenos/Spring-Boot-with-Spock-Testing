@@ -1,6 +1,6 @@
 # Spring-Boot-with-Spock-Testing
 
-In this repo will demostrate how to use Spock unit test on Groovy with Spring Boot framework. The application is a back-end RestAPI application. It is structured into Controller, Service, Dto and Resources layer. The application has 3 Rest end points. 
+In this repo will demostrate how to use Spock unit test on Groovy with Spring Boot framework. The application is a back-end RestAPI application. It is structured into Controller, Service and Resource layer. The application has 3 Rest end points. 
 
 This repository is using:
 1. Java Version 11
@@ -87,5 +87,51 @@ The following.
     }
 
 ```
+
+### DAO layer
+
+This layer is the place to make the queries on the database
+
+```java
+  @Repository
+  public interface UserRepository extends JpaRepository<User, Long> {
+
+      User findByUserId(Long id);
+
+      User findByLastName(String lastName);
+
+      List<User> findByFirstName(String firstName);
+
+```
+
+### Testing
+
+In this part, is the testing the methods of the Repository layer and Service layer.
+
+```java 
+    def "GetAllUsers"() {
+        setup:
+        List<User> userList = new ArrayList<>(Arrays.asList(new User(1l, "Renos", "Bardis", "Renos87", "renos@gmail.com"),
+        new User(2l, "Giannis", "Papas", "Giannis89", "giannis@gmail.com"),
+        new User(3l, "Nikos", "Nikolaidi", "Nick78", "nikos@gmail.com")))
+
+        def userRepositoryMock = Spy(UserRepository)
+        userRepositoryMock.findAll() >> userList
+        def userService = new UserServiceImpl(userRepositoryMock)
+
+        when:
+        List<User> res = userService.getAllUsers()
+
+        then:
+        notThrown(IllegalArgumentException)
+        res.size() == 3
+        res.get(0).getFirstName() == "Renos"
+        res.get(1).getFirstName() == "Giannis"
+        res.get(2).getFirstName() == "Nikos"
+    }
+```
+
+
+
 
 
