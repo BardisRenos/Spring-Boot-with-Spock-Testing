@@ -63,7 +63,7 @@ The end points of the application.
 
 ###  Building the Service layer.
 
-The following.
+The following layer is the manipulation of the data. 
 
 ```java
     @Override
@@ -90,7 +90,7 @@ The following.
 
 ### DAO layer
 
-This layer is the place to make the queries on the database
+This layer is the place to make the queries on the database tables.
 
 ```java
   @Repository
@@ -107,6 +107,8 @@ This layer is the place to make the queries on the database
 ### Testing
 
 In this part, is the testing the methods of the Repository layer and Service layer.
+
+1. This is for the Service layer.
 
 ```java 
     def "GetAllUsers"() {
