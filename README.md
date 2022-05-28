@@ -133,7 +133,37 @@ In this part, is the testing the methods of the Repository layer and Service lay
     }
 ```
 
+2. This is for the Repository layer
+
+This part initialize the classes that we need.
+
+```java
+    @Autowired
+    MockMvc mockMvc
+
+    UserServiceImpl userServiceImpl
+
+    def setup () {
+        userServiceImpl = Spy(UserServiceImpl)
+    }
+```
+
+The code here test the URL path if it works properly. 
+
+```java
+    def "GetUsers"() {
+        given:
+        def user1 = new User(1L, "Renos", "Renos87", "Bardis","renos@gmail.com")
+        def user2 = new User(2L, "Nikos", "Nikos85", "Papas","Nikos@gmail.com")
+        userServiceImpl.getAllUsers() >> [user1, user2]
+
+        when:
+        def response = mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/users")).andReturn().getResponse()
+
+        then:
+        response.status == HttpServletResponse.SC_OK
+    }
 
 
-
+```
 
