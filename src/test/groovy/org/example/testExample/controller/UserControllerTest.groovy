@@ -1,6 +1,5 @@
 package org.example.testExample.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.example.testExample.resources.User
 import org.example.testExample.service.UserServiceImpl
 import org.junit.runner.RunWith
@@ -30,14 +29,11 @@ class UserControllerTest extends Specification {
     @Autowired
     MockMvc mockMvc
 
-    @Autowired
     UserServiceImpl userServiceImpl
 
-    @Autowired
-    ObjectMapper objectMapper = new ObjectMapper()
-
-    private String endpoint = "http://localhost:8081/api/1.0/user/1"
-
+    def setup () {
+        userServiceImpl = Spy(UserServiceImpl)
+    }
 
     def "GetUsers"() {
         given:
@@ -50,7 +46,6 @@ class UserControllerTest extends Specification {
 
         then:
         response.status == HttpServletResponse.SC_OK
-
     }
 
     def "GetUserById"() {
@@ -79,7 +74,6 @@ class UserControllerTest extends Specification {
 
     }
 
-    @Unroll
     def "GetUsersByFirstName"() {
         given:
         List<User> resList = new ArrayList<>()
