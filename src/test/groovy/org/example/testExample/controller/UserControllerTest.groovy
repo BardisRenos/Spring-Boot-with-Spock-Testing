@@ -37,27 +37,47 @@ class UserControllerTest extends Specification {
 
     def "GetUsers"() {
         given:
-        def user1 = new User(1L, "Renos", "Renos87", "Bardis","renos@gmail.com")
-        def user2 = new User(2L, "Nikos", "Nikos85", "Papas","Nikos@gmail.com")
-        userServiceImpl.getAllUsers() >> [user1, user2]
+        List<User> userList = new ArrayList<>(Arrays.asList(new User(1l, "Renos", "Renos87", "Bardis", "renos@gmail.com"),
+                new User(2l, "Giannis", "Giannis89", "Papas", "giannis@gmail.com"),
+                new User(3l, "Nikos", "Nick78", "Nikolaidi", "nikos@gmail.com")))
+
+        userServiceImpl.getAllUsers() >> userList
+        def userController= new UserController(userServiceImpl)
 
         when:
+        def res = userController.getUsers()
         def response = mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/users")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
+
+        and:
+        res.get(0).getFirstName() == "Renos"
+        res.get(0).getLastName() == "Bardis"
+        res.get(0).getEmail() == "renos@gmail.com"
+
+        res.get(1).getFirstName() == "Giannis"
+        res.get(1).getLastName() == "Papas"
+        res.get(1).getEmail() == "giannis@gmail.com"
+
     }
 
     def "GetUserById"() {
         given:
         def user1 = new User(1L, "Renos", "Renos87", "Bardis","renos@gmail.com")
         userServiceImpl.getUserById(1) >> user1
+        def userController= new UserController(userServiceImpl)
 
         when:
+        def res = userController.getUserById(1L)
         def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/1")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
+
+        and:
+        res.getFirstName() == "Renos"
+        res.getLastName() == "Bardis"
     }
 
 
@@ -65,29 +85,46 @@ class UserControllerTest extends Specification {
         given:
         def user1 = new User(1L, "Renos", "Renos87", "Bardis","renos@gmail.com")
         userServiceImpl.getUserByLastName("Bardis") >> user1
+        def userController= new UserController(userServiceImpl)
 
         when:
+        def res = userController.getUsersByLastName("Bardis")
         def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/lastName/Bardis")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
 
+        and:
+        res.getFirstName() == "Renos"
+        res.getLastName() == "Bardis"
+
     }
 
     def "GetUsersByFirstName"() {
         given:
-        List<User> resList = new ArrayList<>()
-        def user1 = new User(1L, "Renos", "Renos87", "Bardis","renos@gmail.com")
-        def user2 = new User(2L, "Nikos", "Nikos85", "Papas","Nikos@gmail.com")
-        resList.add(user1)
-        resList.add(user2)
-        userServiceImpl.getUserByFirstName("Renos") >> resList
+        List<User> userList = new ArrayList<>(Arrays.asList(new User(1l, "Renos", "Renos87", "Bardis", "renos@gmail.com"),
+                new User(2l, "Giannis", "Giannis89", "Papas", "giannis@gmail.com"),
+                new User(3l, "Nikos", "Nick78", "Nikolaidi", "nikos@gmail.com")))
+
+        userServiceImpl.getUserByFirstName("Renos") >> userList
+        def userController= new UserController(userServiceImpl)
 
         when:
+        def res = userController.getUsersByFirstName("Renos")
         def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/firstName/Renos")).andReturn()
 
         then:
         response.getResponse().status == HttpServletResponse.SC_OK
+
+        and:
+        res.get(0).getFirstName() == "Renos"
+        res.get(0).getLastName() == "Bardis"
+
+        res.get(1).getFirstName() == "Giannis"
+        res.get(1).getLastName() == "Papas"
+
+        res.get(2).getFirstName() == "Nikos"
+        res.get(2).getLastName() == "Nikolaidi"
     }
 
     @TestConfiguration
