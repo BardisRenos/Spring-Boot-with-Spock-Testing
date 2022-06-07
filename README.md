@@ -11,6 +11,8 @@ This repository is using:
 
 ### Building the Data entity layer.
 
+In this section, the repo demonstrates the entity layer. Which means, the representation of each database table into Java code. Indicating the database table name. Also, highlighting each entity of the database and indicating the primary key. 
+
 ```java
   @Table(name = "users")
   public class User {
@@ -32,7 +34,7 @@ This repository is using:
 
 ###  Building the Controller layer.
 
-The end points of the application.
+The end points of the application. Some examples
 
 ```java
     @GetMapping(value = "/users")
