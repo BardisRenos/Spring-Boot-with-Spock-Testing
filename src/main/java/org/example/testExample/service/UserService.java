@@ -9,6 +9,6 @@ public interface UserService {
 
     List<User> getAllUsers();
     User getUserById(Long id) throws UserNotFoundException;
-    User getUserByLastName(String lastName);
-    List<User> getUserByFirstName(String firstName);
+    User getUserByLastName(String lastName) throws UserNotFoundException;
+    List<User> getUserByFirstName(String firstName) throws UserNotFoundException;
 }
