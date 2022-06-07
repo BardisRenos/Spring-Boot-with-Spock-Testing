@@ -104,6 +104,29 @@ This layer is the place to make the queries on the database tables.
 
 ```
 
+### Exception Handling
+
+This part manage the exceptioon that may accure. In this case the repo has a COntrollerAdvice.
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    /**
+     * Handles User class exceptions
+     * @param ex the exception
+     * @return ResponseEntity
+     */
+    @ExceptionHandler({UserNotFoundException.class})
+    public ResponseEntity<Object> handleNotFoundUser(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
+}
+
+```
+
+
 ### Testing
 
 In this part, is the testing the methods of the Repository layer and Service layer.
@@ -176,7 +199,7 @@ The code here test the URL path if it works properly.
         res.get(1).getLastName() == "Papas"
         res.get(1).getEmail() == "giannis@gmail.com"
     }
-
-
 ```
+
+
 
