@@ -5,7 +5,7 @@ import org.example.testExample.resources.User
 import spock.lang.Specification
 import spock.lang.Title
 
-@Title("service Layer test ")
+@Title("Service Layer test ")
 class UserServiceImplTest extends Specification {
 
     def "GetAllUsers"() {
