@@ -1,22 +1,21 @@
 package org.example.testExample.service.Implementation;
 
-import lombok.RequiredArgsConstructor;
 import org.example.testExample.dao.CompanyRepository;
-import org.example.testExample.exception.CompanyNotFoundException;
 import org.example.testExample.resources.Company;
 import org.example.testExample.service.CompanyService;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
+
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     @Override
     public List<Company> getAllCompanies() {
@@ -24,9 +23,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company getCompanyById(Long id) throws CompanyNotFoundException {
+    public Company getCompanyById(Long id) {
         return companyRepository.findByCompanyId(id);
-
     }
 
     @Override

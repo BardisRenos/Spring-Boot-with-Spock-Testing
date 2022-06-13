@@ -41,7 +41,7 @@ class UserControllerTest extends Specification {
                 new User(3l, "Nikos", "Nick78", "Nikolaidi", "nikos@gmail.com")))
 
         userServiceImpl.getAllUsers() >> userList
-        def userController= new UserController(userServiceImpl)
+        def userController = new UserController(userServiceImpl)
 
         when:
         def res = userController.getUsers()

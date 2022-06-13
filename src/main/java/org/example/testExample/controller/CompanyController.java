@@ -1,14 +1,13 @@
 package org.example.testExample.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.testExample.exception.CompanyNotFoundException;
 import org.example.testExample.resources.Company;
 import org.example.testExample.service.Implementation.CompanyServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/1.0/")
@@ -19,20 +18,20 @@ public class CompanyController {
 
     @GetMapping(value = "/companies")
     @ResponseStatus(HttpStatus.OK)
-    public List<Company> getUsers() {
+    public List<Company> getCompanies() {
         return companyService.getAllCompanies();
     }
 
     @GetMapping(value = "/company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Company getUserById(@PathVariable(value = "id") Long id) throws CompanyNotFoundException {
+    public Company getCompanyById(@PathVariable(value = "id") Long id) {
         return companyService.getCompanyById(id);
     }
 
     @GetMapping(value = "/company/companyName/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Company getUsersByLastName(@PathVariable(value = "name") String lastName) {
-        return companyService.getCompanyByName(lastName);
+    public Company getCompanyByName(@PathVariable(value = "name") String name) {
+        return companyService.getCompanyByName(name);
     }
 
 }
