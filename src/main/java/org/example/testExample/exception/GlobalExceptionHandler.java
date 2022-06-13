@@ -23,4 +23,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Handles Company class exceptions
+     * @param ex the exception
+     * @return ResponseEntity
+     */
+    @ExceptionHandler({CompanyNotFoundException.class})
+    public ResponseEntity<Object> handleNotFoundCompany(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
 }

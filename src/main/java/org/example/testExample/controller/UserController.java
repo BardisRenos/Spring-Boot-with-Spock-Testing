@@ -3,7 +3,7 @@ package org.example.testExample.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.testExample.exception.UserNotFoundException;
 import org.example.testExample.resources.User;
-import org.example.testExample.service.UserServiceImpl;
+import org.example.testExample.service.Implementation.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
