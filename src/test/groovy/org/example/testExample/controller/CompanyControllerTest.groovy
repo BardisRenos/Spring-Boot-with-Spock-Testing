@@ -4,12 +4,8 @@ import org.example.testExample.resources.Company
 import org.example.testExample.service.Implementation.CompanyServiceImpl
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.ApplicationContext
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.test.context.web.WebAppConfiguration
@@ -31,9 +27,6 @@ class CompanyControllerTest extends Specification {
 
     CompanyServiceImpl companyService
 
-    @Autowired
-    private ApplicationContext applicationContext;
-
     def setup () {
         companyService = Spy(CompanyServiceImpl)
     }
@@ -42,7 +35,7 @@ class CompanyControllerTest extends Specification {
         List<Company> companies = new ArrayList<>(Arrays.asList(
                 new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr"),
                 new Company(2L, "Astek", "IT-Sector", "astek@esn-astek.fr"),
-                new Company(3L, "ReiffesenBank", "Banking", "rb@banking.cz")));
+                new Company(3L, "ReiffesenBank", "Banking", "rb@banking.cz")))
 
         companyService.getAllCompanies() >> companies
         def companyController = new CompanyController(companyService)
