@@ -25,13 +25,13 @@ public class CompanyController {
 
     @GetMapping(value = "/company/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Company> getUserById(@PathVariable(value = "id") Long id) throws CompanyNotFoundException {
+    public Company getUserById(@PathVariable(value = "id") Long id) throws CompanyNotFoundException {
         return companyService.getCompanyById(id);
     }
 
     @GetMapping(value = "/company/companyName/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Company getUsersByLastName(@PathVariable(value = "name") String lastName) throws CompanyNotFoundException {
+    public Company getUsersByLastName(@PathVariable(value = "name") String lastName) {
         return companyService.getCompanyByName(lastName);
     }
 

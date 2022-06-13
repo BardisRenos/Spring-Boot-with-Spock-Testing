@@ -7,6 +7,7 @@ import org.example.testExample.resources.Company;
 import org.example.testExample.service.CompanyService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,18 +24,13 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Optional<Company> getCompanyById(Long id) throws CompanyNotFoundException {
-       if(Objects.isNull(companyRepository.findById(id))) {
-           throw new CompanyNotFoundException(String.format("The company not found with the id: %s ", id));
-       }
-        return companyRepository.findById(id);
+    public Company getCompanyById(Long id) throws CompanyNotFoundException {
+        return companyRepository.findByCompanyId(id);
+
     }
 
     @Override
-    public Company getCompanyByName(String name) throws CompanyNotFoundException {
-        if(Objects.isNull(companyRepository.findByCompanyName(name))) {
-            throw  new CompanyNotFoundException(String.format("The company not found with the name: %s ", name));
+    public Company getCompanyByName(String name) {
+            return companyRepository.findByCompanyName(name);
         }
-        return companyRepository.findByCompanyName(name);
     }
-}

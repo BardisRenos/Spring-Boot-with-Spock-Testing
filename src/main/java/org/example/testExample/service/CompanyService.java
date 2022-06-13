@@ -10,7 +10,7 @@ public interface CompanyService {
 
     List<Company> getAllCompanies();
 
-    Optional<Company> getCompanyById(Long id) throws CompanyNotFoundException;
+    Company getCompanyById(Long id) throws CompanyNotFoundException;
 
     Company getCompanyByName(String name) throws CompanyNotFoundException;
 }
