@@ -1,7 +1,7 @@
 package org.example.testExample.controller
 
 import org.example.testExample.resources.User
-import org.example.testExample.service.UserServiceImpl
+import org.example.testExample.service.Implementation.UserServiceImpl
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import spock.lang.Specification
 import spock.lang.Title
-import spock.lang.Unroll
 import spock.mock.DetachedMockFactory
 
 import javax.servlet.http.HttpServletResponse
@@ -42,7 +41,7 @@ class UserControllerTest extends Specification {
                 new User(3l, "Nikos", "Nick78", "Nikolaidi", "nikos@gmail.com")))
 
         userServiceImpl.getAllUsers() >> userList
-        def userController= new UserController(userServiceImpl)
+        def userController = new UserController(userServiceImpl)
 
         when:
         def res = userController.getUsers()

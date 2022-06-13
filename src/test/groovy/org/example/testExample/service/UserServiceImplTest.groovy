@@ -2,10 +2,11 @@ package org.example.testExample.service
 
 import org.example.testExample.dao.UserRepository
 import org.example.testExample.resources.User
+import org.example.testExample.service.Implementation.UserServiceImpl
 import spock.lang.Specification
 import spock.lang.Title
 
-@Title("Service Layer test ")
+@Title("Service Layer test User Entity")
 class UserServiceImplTest extends Specification {
 
     def "GetAllUsers"() {

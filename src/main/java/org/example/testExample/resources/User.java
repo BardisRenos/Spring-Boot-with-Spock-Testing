@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * The user entity la
+ * The user entity layer
  */
 @Entity
 @Getter

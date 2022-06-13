@@ -1,9 +1,10 @@
-package org.example.testExample.service;
+package org.example.testExample.service.Implementation;
 
 import lombok.RequiredArgsConstructor;
 import org.example.testExample.dao.UserRepository;
 import org.example.testExample.exception.UserNotFoundException;
 import org.example.testExample.resources.User;
+import org.example.testExample.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
