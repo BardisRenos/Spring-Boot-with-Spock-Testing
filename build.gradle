@@ -7,7 +7,6 @@ plugins {
 
 group = 'org.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -20,22 +19,24 @@ repositories {
 }
 
 dependencies {
+
 	implementation (
 			'org.springframework.boot:spring-boot-starter-data-jpa',
 			'org.springframework.boot:spring-boot-starter-jdbc',
 			'org.springframework.boot:spring-boot-starter-web',
 			'org.springframework.boot:spring-boot-starter-test',
-			'org.glassfish.jaxb:jaxb-runtime:2.3.1',
+			'org.glassfish.jaxb:jaxb-runtime:4.0.0',
 			'junit:junit:4.13.2',
-			'net.minidev:json-smart:2.3',
-			'net.minidev:asm:1.0.2'
+			'net.minidev:json-smart:2.4.8',
+			'net.minidev:asm:1.0.2',
 	)
+	implementation 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
 
 	testImplementation (
 			'org.spockframework:spock-core:2.2-M1-groovy-3.0',
 			'org.junit.jupiter:junit-jupiter-api:5.8.2',
 			'org.hamcrest:hamcrest-core:2.2',
-			'org.codehaus.groovy:groovy-all:3.0.10',
+			'org.codehaus.groovy:groovy-all:3.0.11',
 			'org.spockframework:spock-spring:2.2-M1-groovy-3.0',
 			'com.geowarin:spring-spock-mvc:0.2.1'
 	)

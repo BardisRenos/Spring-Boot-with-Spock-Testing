@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/1.0/")
+@RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class UserController {
     

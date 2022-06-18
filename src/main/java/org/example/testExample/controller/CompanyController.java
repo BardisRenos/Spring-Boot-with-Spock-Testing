@@ -3,14 +3,13 @@ package org.example.testExample.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.testExample.resources.Company;
 import org.example.testExample.service.Implementation.CompanyServiceImpl;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/1.0/")
+@RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class CompanyController {
 

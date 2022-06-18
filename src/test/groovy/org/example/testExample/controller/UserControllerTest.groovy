@@ -44,20 +44,20 @@ class UserControllerTest extends Specification {
         def userController = new UserController(userServiceImpl)
 
         when:
-        def res = userController.getUsers()
-        def response = mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/users")).andReturn().getResponse()
+        def resData = userController.getUsers()
+        def response = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
 
         and:
-        res.get(0).getFirstName() == "Renos"
-        res.get(0).getLastName() == "Bardis"
-        res.get(0).getEmail() == "renos@gmail.com"
+        resData.get(0).getFirstName() == "Renos"
+        resData.get(0).getLastName() == "Bardis"
+        resData.get(0).getEmail() == "renos@gmail.com"
 
-        res.get(1).getFirstName() == "Giannis"
-        res.get(1).getLastName() == "Papas"
-        res.get(1).getEmail() == "giannis@gmail.com"
+        resData.get(1).getFirstName() == "Giannis"
+        resData.get(1).getLastName() == "Papas"
+        resData.get(1).getEmail() == "giannis@gmail.com"
 
     }
 
@@ -68,15 +68,15 @@ class UserControllerTest extends Specification {
         def userController= new UserController(userServiceImpl)
 
         when:
-        def res = userController.getUserById(1L)
-        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/1")).andReturn().getResponse()
+        def resData = userController.getUserById(1L)
+        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/1")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
 
         and:
-        res.getFirstName() == "Renos"
-        res.getLastName() == "Bardis"
+        resData.getFirstName() == "Renos"
+        resData.getLastName() == "Bardis"
     }
 
 
@@ -87,15 +87,15 @@ class UserControllerTest extends Specification {
         def userController= new UserController(userServiceImpl)
 
         when:
-        def res = userController.getUsersByLastName("Bardis")
-        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/lastName/Bardis")).andReturn().getResponse()
+        def resData = userController.getUsersByLastName("Bardis")
+        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/lastName/Bardis")).andReturn().getResponse()
 
         then:
         response.status == HttpServletResponse.SC_OK
 
         and:
-        res.getFirstName() == "Renos"
-        res.getLastName() == "Bardis"
+        resData.getFirstName() == "Renos"
+        resData.getLastName() == "Bardis"
 
     }
 
@@ -109,21 +109,21 @@ class UserControllerTest extends Specification {
         def userController= new UserController(userServiceImpl)
 
         when:
-        def res = userController.getUsersByFirstName("Renos")
-        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/1.0/user/firstName/Renos")).andReturn()
+        def resData = userController.getUsersByFirstName("Renos")
+        def response = this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/firstName/Renos")).andReturn()
 
         then:
         response.getResponse().status == HttpServletResponse.SC_OK
 
         and:
-        res.get(0).getFirstName() == "Renos"
-        res.get(0).getLastName() == "Bardis"
+        resData.get(0).getFirstName() == "Renos"
+        resData.get(0).getLastName() == "Bardis"
 
-        res.get(1).getFirstName() == "Giannis"
-        res.get(1).getLastName() == "Papas"
+        resData.get(1).getFirstName() == "Giannis"
+        resData.get(1).getLastName() == "Papas"
 
-        res.get(2).getFirstName() == "Nikos"
-        res.get(2).getLastName() == "Nikolaidi"
+        resData.get(2).getFirstName() == "Nikos"
+        resData.get(2).getLastName() == "Nikolaidi"
     }
 
     @TestConfiguration
