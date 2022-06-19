@@ -2,10 +2,8 @@ package org.example.testExample.resources;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * The Company entity layer
@@ -29,4 +27,14 @@ public class Company {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "cu_fk", referencedColumnName = "company_id")
+    private List<User> users;
+
+    public Company(Long companyId, String companyName, String companySector, String email) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.companySector = companySector;
+        this.email = email;
+    }
 }

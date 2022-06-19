@@ -26,6 +26,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getCompanyByName(String name) {
-            return companyRepository.findByCompanyName(name);
-        }
+        return companyRepository.findByCompanyName(name);
     }
+
+    @Override
+    public Company getCompanyUsers(String companyName) {
+        return companyRepository.findByCompanyNameAndUser(companyName);
+    }
+}

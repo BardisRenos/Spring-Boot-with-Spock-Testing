@@ -16,10 +16,9 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 public class DataBaseConfig {
-
     @Bean
 	public CommandLineRunner initDb(UserRepository uRepository, CompanyRepository cRepository)  {
-		return args ->{
+		return args -> {
 			List<User> users = new ArrayList<>(Arrays.asList(
 					new User(1L, "Renos", "Renos87", "Bardis", "renos@gmail.com"),
 					new User(2L, "Omar", "Omar90", "Matter", "omar@gmail.com"),
@@ -29,6 +28,9 @@ public class DataBaseConfig {
 					new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr"),
 					new Company(2L, "Astek", "IT-Sector", "astek@esn-astek.fr"),
 					new Company(3L, "ReiffesenBank", "Banking", "rb@banking.cz")));
+
+			Company company = companies.get(0);
+			company.setUsers(users);
 
 			uRepository.saveAll(users);
 			cRepository.saveAll(companies);
