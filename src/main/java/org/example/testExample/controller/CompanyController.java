@@ -33,4 +33,10 @@ public class CompanyController {
         return companyService.getCompanyByName(name);
     }
 
+    @GetMapping(value = "/company/users")
+    @ResponseStatus(HttpStatus.OK)
+    public Company getCompanyUsers(@RequestParam(value = "companyName") String companyName) {
+        return companyService.getCompanyUsers(companyName);
+    }
+
 }

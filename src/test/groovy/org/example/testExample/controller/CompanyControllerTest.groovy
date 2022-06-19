@@ -1,8 +1,10 @@
 package org.example.testExample.controller
 
 import org.example.testExample.resources.Company
+import org.example.testExample.resources.User
 import org.example.testExample.service.Implementation.CompanyServiceImpl
 import org.junit.runner.RunWith
+import org.spockframework.mock.IResponseGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -35,6 +37,7 @@ class CompanyControllerTest extends Specification {
     }
 
     def "GetCompanies"() {
+        given:
         List<Company> companies = new ArrayList<>(Arrays.asList(
                 new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr"),
                 new Company(2L, "Astek", "IT-Sector", "astek@esn-astek.fr"),
@@ -56,6 +59,7 @@ class CompanyControllerTest extends Specification {
     }
 
     def "GetCompanyById"() {
+        given:
         Company company = new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr")
 
         companyService.getCompanyById(1) >> company
@@ -75,6 +79,7 @@ class CompanyControllerTest extends Specification {
     }
 
     def "GetCompanyByName"() {
+        given:
         Company company = new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr")
 
         companyService.getCompanyByName("Alten") >> company
@@ -91,6 +96,32 @@ class CompanyControllerTest extends Specification {
         resData.getCompanyName() == "Alten"
         resData.getCompanySector() == "IT-Sector"
 
+    }
+
+    def "GetCompanyUsers"() {
+        given:
+        Company company = new Company(1L, "Alten", "IT-Sector", "alten@esn-alten.fr")
+        List<User> users = new ArrayList<>(Arrays.asList(
+                new User(1L, "Renos", "Renos87", "Bardis", "renos@gmail.com"),
+                new User(2L, "Omar", "Omar90", "Matter", "omar@gmail.com"),
+                new User(3L, "Marc", "Marc97", "Better", "marc@gmail.com")))
+
+        company.setUsers(users)
+        companyService.getCompanyUsers("Alten") >> company
+        def companyController = new CompanyController(companyService)
+
+        when:
+        def resData = companyController.getCompanyUsers("Alten")
+        def response = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/company/users").param("companyName", "Alten")).andReturn().getResponse()
+
+        then:
+        response.status == HttpServletResponse.SC_OK
+
+        and:
+        resData.getCompanyName() == "Alten"
+        resData.getCompanySector() == "IT-Sector"
+        resData.getUsers().size() == 3
+        resData.getUsers().get(0).getLastName() == "Bardis"
     }
 
     @TestConfiguration
