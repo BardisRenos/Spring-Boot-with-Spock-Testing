@@ -7,7 +7,7 @@ import org.example.testExample.service.Implementation.CompanyServiceImpl
 import spock.lang.Specification
 import spock.lang.Title
 
-@Title("Service Layer test Company Entity")
+@Title("Service Layer Test Company Entity")
 class CompanyServiceImplTest extends  Specification {
 
     def "GetAllCompanies"() {
@@ -95,5 +95,9 @@ class CompanyServiceImplTest extends  Specification {
         res.getCompanyId() == 1
         res.getCompanyName() == "Alten"
         res.getUsers().size() == 3
+        res.getUsers().get(0).getFirstName() == "Renos"
+        res.getUsers().get(0).getLastName() == "Bardis"
+        res.getUsers().get(1).getFirstName() == "Omar"
+        res.getUsers().get(1).getLastName() == "Matter"
     }
 }

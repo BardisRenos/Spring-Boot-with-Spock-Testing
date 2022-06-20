@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse
 @AutoConfigureMockMvc
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
+@Title("Controller Layer Test User Entity")
 class UserControllerTest extends Specification {
 
     @Autowired

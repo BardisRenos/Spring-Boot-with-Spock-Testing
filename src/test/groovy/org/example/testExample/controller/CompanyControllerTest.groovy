@@ -4,7 +4,6 @@ import org.example.testExample.resources.Company
 import org.example.testExample.resources.User
 import org.example.testExample.service.Implementation.CompanyServiceImpl
 import org.junit.runner.RunWith
-import org.spockframework.mock.IResponseGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -16,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import spock.lang.Specification
+import spock.lang.Title
 import spock.mock.DetachedMockFactory
 
 import javax.servlet.http.HttpServletResponse
@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse
 @AutoConfigureMockMvc
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration()
+@Title("Controller Layer Test Company Entity")
 class CompanyControllerTest extends Specification {
 
     @Autowired
@@ -121,7 +122,9 @@ class CompanyControllerTest extends Specification {
         resData.getCompanyName() == "Alten"
         resData.getCompanySector() == "IT-Sector"
         resData.getUsers().size() == 3
+        resData.getUsers().get(0).getFirstName() == "Renos"
         resData.getUsers().get(0).getLastName() == "Bardis"
+
     }
 
     @TestConfiguration
